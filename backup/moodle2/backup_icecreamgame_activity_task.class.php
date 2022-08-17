@@ -16,6 +16,6 @@ class backup_icecreamgame_activity_task extends backup_activity_task {
     }
 
     static public function encode_content_links($content) {
-
+        return $content;
     }
 }

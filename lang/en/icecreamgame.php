@@ -25,6 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['icecreamgame:addinstance'] = 'Neue Eisverkauf-Spiel Instanz';
+$string['icecreamgame:view'] = 'Eisverkauf-Spiel anzeigen';
 $string['pluginname'] = 'Eisverkauf Ratespiel';
 $string['modulename'] = 'Eisverkauf';
 $string['modulenameplural'] = "Eisverkäufe";
