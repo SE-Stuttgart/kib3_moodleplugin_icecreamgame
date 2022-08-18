@@ -23,5 +23,15 @@ class restore_icecreamgame_activity_task extends restore_activity_task {
     static public function define_decode_rules() {
         $rules = array();
         return $rules;
+    
+    }
+    public static function define_restore_log_rules() {
+        $rules = array();
+        return $rules;
+    }
+
+    public static function define_restore_log_rules_for_course() {
+        $rules = array();
+        return $rules;
     }
 }

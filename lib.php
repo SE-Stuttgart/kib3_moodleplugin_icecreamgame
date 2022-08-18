@@ -96,6 +96,10 @@ function icecreamgame_delete_instance($id) {
         return false;
     }
 
+    // delete related items 
+    $DB->delete_records('icecreamgame_grades', array('icecreamgameid' => $id));
+    $DB->delete_records('icecreamgame_guesses', array('icecreamgameid' => $id));
+
     $DB->delete_records('icecreamgame', array('id' => $id));
 
     return true;
