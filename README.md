@@ -1,10 +1,20 @@
-# Eisverkauf Ratespiel #
+# Icecream game / Eisverkauf Ratespiel
 
-TODO Describe the plugin shortly here.
+## English description
 
-TODO Provide more detailed description here.
+**German version please see below**
 
-## Installing via uploaded ZIP file ##
+This plugin implements a game for guessing icecream sales. It is intended for introducing students to the topic of machine learning. Learners estimate sales in three groups. Each group represents a different typical strategy in machine learning. 
+
+The guessing game is provided in an activity of type "icecreamgame". When viewing this material, learners see an HTML page with an embedded introductory video. After viewing the video, learners pick one of three groups. This choice is irreversible and is stored in the Moodle database as well as in the browser cache. In each of the three groups, participants receive information about expected sales, however in different form. 
+
+Finally learners are asked to guess sales for a specific day, given the information received above. The number of guesses can be configured. Learners receive feedback about their result. 
+
+The plugin requires configuring a webservice in Moodle. 
+
+Installation of the plugin and configuration of the webservice are described below. 
+
+### Installing via uploaded ZIP file ##
 
 1. Log in to your Moodle site as an admin and go to _Site administration >
    Plugins > Install plugins_.
@@ -12,7 +22,7 @@ TODO Provide more detailed description here.
    extra details if your plugin type is not automatically detected.
 3. Check the plugin validation report and finish the installation.
 
-## Installing manually ##
+### Installing manually ##
 
 The plugin can be also installed by putting the contents of this directory to
 
@@ -27,24 +37,84 @@ Alternatively, you can run
 
 to complete the installation from the command line.
 
-## Konfiguration
+### Configuring the web service
 
-1. Plugin als "Aktivität" installieren
+1. Install the plugin 
+2. Site administration ->  scroll to section "Advanced features" -> Enable web services  `yes`
+3. Site administration -> Server -> scroll to section "Category: Web services" -> Overview
+	1. Enable web services -> `yes`
+	2. Enable protocols -> `rest`
+	5. Select a service -> Add
+		* Name: `moodleservice`
+		* Short name: `moodleservice`
+		* Enables : `yes`
+		* Authorised users only: `no`
+		* Required capability: `no required capability`
+		* Add service -> Automatic redirect to:
+	6. Add functions to the service 'moodleservice' (if no redirect: Site administration -> Server -> Category: Webservices -> External services, then click `Functions` for moodleservice in section `Custom services`)
+		* Add functions
+		* add all functions that start with `mod_icecreamgame` (4 functions)
+		* Add functions
+4. Website Administration -> Nutzer/innen ->  Scrolle zu Abschnitt "Rechte" -> Suche in Spalte "Beschreibung" nach `Alle authentifizierten Nutzer/innen auf der Website` -> Klicke "Bearbeiten"
+	1. Mit Filter-Suchfeld nach `createtoken` suchen
+		1. Ergebnis "moodle/webservice:createtoken" -> `Erlauben`
+	2. Mit Filter-Suchfeld nach `webservice/rest` suchen
+		1. Ergebnis "webservice/rest:use" -> `Erlauben`
+	3. "Änderungen speichern" anklicken
+5. Add an activity of type icecreamgame
+6. Log in as as student (not as a trainer!)
+7. Test the game
+
+## German description / Deutsche Beschreibung
+
+Dieses Plugin implementiert ein Ratespiel, bei dem Lernende Absatzzahlen für Eis schätzen sollen. Es dient zur Vorbereitung auf das Thema maschinelles Lernen. Die Lernenden schätzen die Absatzzahlen in drei Gruppen. Jede Gruppe repräsentiert dabei ein anderes für maschinelles Lernen typisches Vorgehen. 
+
+Das Ratespiel ist als Aktivität namens "Eisverkauf Ratespiel" umgesetzt. Bei Anklicken von Material dieses Typs wird den Lernenden eine HTML-Seite mit einem eingebetteten einführenden Video angezeigt. Weiter unten teilen sich die Lernenden selbst einer der drei Gruppen zu. Die Auswahl ist unwiderruflich und wird sowohl in der Moodle-Datenbank als auch im Browsercache gespeichert. In jeder der drei Gruppen werden Informationen über zu erwartende Absatzzahlen präsentiert, allerdings in unterschiedlicher Form.  
+
+Abschließend sollen die Lernenden mithilfe der erhaltenen Informationen die Absatzzahlen für einen konkreten Tag schätzen. Die Anzahl der Rateversuch kann konfiguriert werden. Die Lernenden erhalten Rückmeldung über ihr Ergebnis. 
+
+Das Plugin erfordert die Konfiguration eines Webservice in Moodle. 
+
+Installation und Konfiguration des Webservice sind im Folgenden beschrieben. 
+
+### Installation mithilfe des .zip Files
+
+1. Loggen Sie sich als Admin ein und gehen Sie zu Website-Administration -> Plugins -> Plugins installieren
+2. Laden Sie das .zip-File mit dem Plugin-Code hoch. 
+3. Überprüfen Sie die Überblicksseite und schließen Sie die Installation ab. 
+
+### Manuelle Installation  ##
+
+Das Plugin kann alternativ auch installiert werden, indem man den Inhalt der ausgepackten .zip-Datei in folgendes Verzeichnis schreibt
+
+    {ihr/moodle/verzeichnis}/mod/icecreamgame
+
+Anschließend bitte als Admin in Ihrem Moodle einloggen. Gehen Sie zu Website-Administration -> Systemnachrichten, um die Installation abzuschließen. 
+
+Alternativ können Sie auch
+
+    $ php admin/cli/upgrade.php
+
+ausführen, um die Installation auf der Kommandozeile abzuschließen. 
+
+### Konfiguration des Webservice
+
+1. Plugin installieren
 2. Website Administration ->  Scrolle zu Abschnitt "Zusatzoptionen" -> Webservices aktivieren -> `ja`
-3.  Website Administration -> Plugins -> Scrolle zu Abschnitt "Webservices" -> Übersicht 
+3.  Website Administration -> Server -> Scrolle zu Abschnitt "Bereich: Webservices" -> Übersicht 
 	1. Webservices aktivieren -> `ja`
-	2. Protokolle aktivieren -> `REST`
+	2. Protokolle aktivieren -> `rest`
 	5. Service auswählen -> Hinzufügen
-		1. Name: `moodleservice`
-		2. Kurzbezeichnung: `moodleservice`
-		3. Aktiviert : `ja`
-		4. Nur berechtigte Personen: `nein`
-		5. Notwendige Rechte: `keine notwendige Rechte`
-		6. Service hinzufügen anklicken
-	6. Automatische Weiterleitung zu:  Funktionen zum Service 'moodleservice' hinzufügen (falls keine Weiterleitung: Website Administration -> Plugins -> Webservices -> Externe Services, dann im Abschnitt `Spezifische Services` auf `Funktionen` klicken)
-		1. Funktionen hinzufügen anklicken
-		2. Alle Funktionen, die mit `mod_icecreamgame` beginnen hinzufügen (es sind 4 Funktionen)
-		3. Funktionen hinzufügen anklicken
+		* Name: `moodleservice`
+		* Kurzbezeichnung: `moodleservice`
+		*  Aktiviert : `ja`
+		* Nur berechtigte Personen: `nein`
+		* Notwendige Rechte: `keine notwendige Rechte`
+		* Service hinzufügen anklicken -> automatische Weiterleitung zu:
+	6. Funktionen zum Service 'moodleservice' hinzufügen (falls keine Weiterleitung: Website Administration -> Plugins -> Webservices -> Externe Services, dann im Abschnitt `Spezifische Services` auf `Funktionen` klicken)
+		* Funktionen hinzufügen anklicken
+		* Alle Funktionen, die mit `mod_icecreamgame` beginnen hinzufügen (es sind 4 Funktionen)
+		* Funktionen hinzufügen anklicken
 4. Website Administration -> Nuter/innen ->  Scrolle zu Abschnitt "Rechte" -> Suche in Spalte "Beschreibung" nach `Alle authentifizierten Nutzer/innen auf der Website` -> Klicke "Bearbeiten"
 	1. Mit Filter-Suchfeld nach `createtoken` suchen
 		1. Ergebnis "moodle/webservice:createtoken" -> `Erlauben`
@@ -52,7 +122,7 @@ to complete the installation from the command line.
 		1. Ergebnis "webservice/rest:use" -> `Erlauben`
 	3. "Änderungen speichern" anklicken
 5. Eine Instanz des Eiskverkauf-Spiels hinzufügen oder ein Backup wiederherstellen
-6. Als Teilnehmer/in einloggen
+6. Als Teilnehmer/in einloggen (nicht als Trainer!)
 7. Spiel testen
 
 ## License ##
@@ -70,3 +140,10 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## Acknlowledgement / Förderhinweis
+
+This software is developed in the project $KI$ $B^3$ -  *Künstliche Intelligenz in die Berufliche Bildung bringen*. The project is funded by the German Federal Ministry of Education and Research (BMBF) as part of the InnoVET funding line, with the Bundesinstitut für Berufsbildung (BIBB) as funding organization. The project also develops vocational training programs on Artificial Intelligence and Machine Learning (for DQR levels 4, 5, and 6). The software supports teaching in these programs. 
+
+Diese Software wird im Rahmen des Projekts $KI$ $B^3$ -  *Künstliche Intelligenz in die Berufliche Bildung bringen* als InnoVeET-Projekt aus Mitteln des Bundesministeriums für Bildung und Forschung gefördert. Projektträger ist das Bundesinstitut für Berufsbildung (BIBB). Im Projekt werden eine Zusatzqualifikation (DQR 4) sowie zwei Fortbildungen (auf DQR5- bzw. DQR-6 Level) für KI und Maschinelles Lernen entwickelt. Die Software soll die Lehre in diesen Fortbildungen unterstützen.
+
