@@ -55,7 +55,7 @@ to complete the installation from the command line.
 		* Add functions
 		* add all functions that start with `mod_icecreamgame` (4 functions)
 		* Add functions
-4. TODO: Create new user named 'kib3_webservices' and give user permission to create webservice tokens
+4. TODO: Create new user named 'kib3_webservice' and give user permission to create webservice tokens
 5. Add an activity of type icecreamgame
 6. Log in as as student (not as a trainer / admin - you will get a token error!)
 7. Test the game
@@ -110,7 +110,7 @@ ausführen, um die Installation auf der Kommandozeile abzuschließen.
 		* Funktionen hinzufügen anklicken
 		* Alle Funktionen, die mit `mod_icecreamgame` beginnen hinzufügen (es sind 4 Funktionen)
 		* Funktionen hinzufügen anklicken
-4. TODO: Neuen Nutzer anlegen der 'kib3_webservices' heißt und die Berechtigung besitzt, tokens zu generieren
+4. TODO: Neuen Nutzer anlegen der 'kib3_webservice' heißt und die Berechtigung besitzt, tokens zu generieren
 5. Eine Instanz des Eiskverkauf-Spiels hinzufügen oder ein Backup wiederherstellen
 6. Als Teilnehmer/in einloggen (nicht als Trainer!)
 7. Spiel testen
