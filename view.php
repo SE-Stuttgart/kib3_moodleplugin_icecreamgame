@@ -61,9 +61,9 @@ $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($modulecontext);
 
 # obtain user token for webservice
-$service = $DB->get_record("external_services", array('shortname' => 'moodleservice'), '*', MUST_EXIST);
-$user_token = external_generate_token_for_current_user($service);
-
+$service_id = $DB->get_record("external_services", array('shortname' => 'kib3_webservices'), 'id', MUST_EXIST);
+$ws_user_id = $DB->get_record('user', array('username'=>'kib3_webservices'), "id", MUST_EXIST);
+$user_token = $DB->get_record('external_tokens', array('userid'=>$ws_user_id, 'externalserviceid'=>$service->id), 'token', MUST_EXIST);
 
 echo $OUTPUT->header();
 

@@ -45,22 +45,17 @@ to complete the installation from the command line.
 	1. Enable web services -> `yes`
 	2. Enable protocols -> `rest`
 	5. Select a service -> Add
-		* Name: `moodleservice`
-		* Short name: `moodleservice`
+		* Name: `kib3_webservices`
+		* Short name: `kib3_webservices`
 		* Enables : `yes`
 		* Authorised users only: `no`
 		* Required capability: `no required capability`
 		* Add service -> Automatic redirect to:
-	6. Add functions to the service 'moodleservice' (if no redirect: Site administration -> Server -> Category: Webservices -> Custom services (Moodle 3.x: External Services), then click `Functions` for moodleservice in section `Custom services` (Moodle 3.x: External Services))
+	6. Add functions to the service 'kib3_webservices' (if no redirect: Site administration -> Server -> Category: Webservices -> Custom services (Moodle 3.x: External Services), then click `Functions` for kib3_webservices in section `Custom services` (Moodle 3.x: External Services))
 		* Add functions
 		* add all functions that start with `mod_icecreamgame` (4 functions)
 		* Add functions
-4. Website Administration -> Users ->  Permissions -> Define Roles -> Search in column "Description" for `Authenticated user` -> Click "Edit"
-	1. Use the filter at the bottom to search for `createtoken`
-		1. Select "moodle/webservice:createtoken" -> `Allow`
-	2. Use the filter at the bottom to search for `webservice/rest`
-		1. Select "webservice/rest:use" -> `Allow`
-	3. Click "Save changes"
+4. TODO: Create new user named 'kib3_webservices' and give user permission to create webservice tokens
 5. Add an activity of type icecreamgame
 6. Log in as as student (not as a trainer / admin - you will get a token error!)
 7. Test the game
@@ -105,22 +100,17 @@ ausführen, um die Installation auf der Kommandozeile abzuschließen.
 	1. Webservices aktivieren -> `ja`
 	2. Protokolle aktivieren -> `rest`
 	5. Service auswählen -> Hinzufügen
-		* Name: `moodleservice`
-		* Kurzbezeichnung: `moodleservice`
+		* Name: `kib3_webservices`
+		* Kurzbezeichnung: `kib3_webservices`
 		*  Aktiviert : `ja`
 		* Nur berechtigte Personen: `nein`
 		* Notwendige Rechte: `keine notwendige Rechte`
 		* Service hinzufügen anklicken -> automatische Weiterleitung zu:
-	6. Funktionen zum Service 'moodleservice' hinzufügen (falls keine Weiterleitung: Website Administration -> Server -> Webservices -> 6. Funktionen hinzufügen -> Spezifische Services (Moodle 3.x: Externe Services), dann im Abschnitt `Spezifische Services` (Moodle 3.x: Externe Services) auf `Funktionen` klicken)
+	6. Funktionen zum Service 'kib3_webservices' hinzufügen (falls keine Weiterleitung: Website Administration -> Server -> Webservices -> 6. Funktionen hinzufügen -> Spezifische Services (Moodle 3.x: Externe Services), dann im Abschnitt `Spezifische Services` (Moodle 3.x: Externe Services) auf `Funktionen` klicken)
 		* Funktionen hinzufügen anklicken
 		* Alle Funktionen, die mit `mod_icecreamgame` beginnen hinzufügen (es sind 4 Funktionen)
 		* Funktionen hinzufügen anklicken
-4. Website Administration -> Nuter/innen ->  Scrolle zu Abschnitt "Rechte" -> Suche in Spalte "Beschreibung" nach `Alle authentifizierten Nutzer/innen auf der Website` -> Klicke "Bearbeiten"
-	1. Mit Filter-Suchfeld nach `createtoken` suchen
-		1. Ergebnis "moodle/webservice:createtoken" -> `Erlauben`
-	2. Mit Filter-Suchfeld nach `webservice/rest` suchen
-		1. Ergebnis "webservice/rest:use" -> `Erlauben`
-	3. "Änderungen speichern" anklicken
+4. TODO: Neuen Nutzer anlegen der 'kib3_webservices' heißt und die Berechtigung besitzt, tokens zu generieren
 5. Eine Instanz des Eiskverkauf-Spiels hinzufügen oder ein Backup wiederherstellen
 6. Als Teilnehmer/in einloggen (nicht als Trainer!)
 7. Spiel testen
