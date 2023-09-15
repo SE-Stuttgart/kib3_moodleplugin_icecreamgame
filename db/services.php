@@ -33,8 +33,8 @@ $functions = array(
         'description' => 'Gets the configuration parameters for the ice cream game instance.',    //human readable description of the web service function
         'type'        => 'read',                  //database rights of the web service function (read, write)
         'ajax' => true,        // is the service available to 'internal' ajax calls. 
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
-        'capabilities' => 'mod/icecreamgame:view', // comma separated list of capabilities used by the function.
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
     ),
 
     'mod_icecreamgame_assigngroup' => array(         //web service function name
@@ -43,8 +43,8 @@ $functions = array(
         'description' => 'Assigns the user to one of the 3 different groups.',    //human readable description of the web service function
         'type'        => 'write',                  //database rights of the web service function (read, write)
         'ajax' => true,        // is the service available to 'internal' ajax calls. 
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
-        'capabilities' => 'mod/icecreamgame:view', // comma separated list of capabilities used by the function.
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
     ),
 
     'mod_icecreamgame_addguess' => array(         //web service function name
@@ -53,8 +53,8 @@ $functions = array(
         'description' => 'Stores a new user guess.',    //human readable description of the web service function
         'type'        => 'write',                  //database rights of the web service function (read, write)
         'ajax' => true,        // is the service available to 'internal' ajax calls. 
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
-        'capabilities' => 'mod/icecreamgame:view', // comma separated list of capabilities used by the function.
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
     ),
 
     'mod_icecreamgame_sendgrade' => array(         //web service function name
@@ -63,7 +63,7 @@ $functions = array(
         'description' => 'Send the final grade for the user',    //human readable description of the web service function
         'type'        => 'write',                  //database rights of the web service function (read, write)
         'ajax' => true,        // is the service available to 'internal' ajax calls. 
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
-        'capabilities' => 'mod/icecreamgame:view', // comma separated list of capabilities used by the function.
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
     ), 
 );

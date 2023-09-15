@@ -24,6 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+function icecreamgame_debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
 /**
  * Return if the plugin supports $feature.
  *

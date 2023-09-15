@@ -41,9 +41,7 @@ if ($id) {
     $course = $DB->get_record('course', array('id' => $moduleinstance->course), '*', MUST_EXIST);
     $cm = get_coursemodule_from_instance('icecreamgame', $moduleinstance->id, $course->id, false, MUST_EXIST);
 }
-
 require_login($course, true, $cm);
-
 $modulecontext = context_module::instance($cm->id);
 
 // TODO add event back
@@ -64,6 +62,10 @@ $PAGE->set_context($modulecontext);
 $service_id = $DB->get_record("external_services", array('shortname' => 'kib3_webservices'), 'id', MUST_EXIST)->id;
 $ws_user_id = $DB->get_record('user', array('username'=>'kib3_webservice'), "id", MUST_EXIST)->id;
 $user_token = $DB->get_record('external_tokens', array('userid'=>$ws_user_id, 'externalserviceid'=>$service_id), 'token', MUST_EXIST);
+
+icecreamgame_debug_to_console("Service Id: " . $service_id);
+icecreamgame_debug_to_console("WS USER ID: " . $ws_user_id);
+icecreamgame_debug_to_console("User token: " . $user_token);
 
 echo $OUTPUT->header();
 
