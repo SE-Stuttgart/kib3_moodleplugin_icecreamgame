@@ -61,11 +61,7 @@ $PAGE->set_context($modulecontext);
 # obtain user token for webservice
 $service_id = $DB->get_record("external_services", array('shortname' => 'kib3_webservices'), 'id', MUST_EXIST)->id;
 $ws_user_id = $DB->get_record('user', array('username'=>'kib3_webservice'), "id", MUST_EXIST)->id;
-$user_token = $DB->get_record('external_tokens', array('userid'=>$ws_user_id, 'externalserviceid'=>$service_id), 'token', MUST_EXIST);
-
-icecreamgame_debug_to_console("Service Id: " . $service_id);
-icecreamgame_debug_to_console("WS USER ID: " . $ws_user_id);
-icecreamgame_debug_to_console("User token: " . $user_token);
+$user_token = $DB->get_record('external_tokens', array('userid'=>$ws_user_id, 'externalserviceid'=>$service_id), 'token', MUST_EXIST)->token;
 
 echo $OUTPUT->header();
 

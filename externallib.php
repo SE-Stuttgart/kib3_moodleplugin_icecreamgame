@@ -28,7 +28,7 @@ require_once("$CFG->libdir/externallib.php");
 
 
 // require(__DIR__.'/../../config.php');
-require_login();
+// require_login();
 
 class mod_icecreamgame_external extends external_api {
 
