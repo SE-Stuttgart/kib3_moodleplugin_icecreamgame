@@ -63,6 +63,11 @@ $service_id = $DB->get_record("external_services", array('shortname' => 'kib3_we
 $ws_user_id = $DB->get_record('user', array('username'=>'kib3_webservice'), "id", MUST_EXIST)->id;
 $user_token = $DB->get_record('external_tokens', array('userid'=>$ws_user_id, 'externalserviceid'=>$service_id), 'token', MUST_EXIST)->token;
 
+// update course completion on view (before printing header)
+$completion = new completion_info($course);
+$completion->set_module_viewed($cm);
+
+
 echo $OUTPUT->header();
 
 
