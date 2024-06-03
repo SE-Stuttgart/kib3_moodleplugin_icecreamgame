@@ -161,6 +161,7 @@ class mod_icecreamgame_external extends external_api {
     public static function assign_group_returns() {
         return new external_single_structure(
             array(
+                'group' => new external_value(PARAM_INT, 'group number user was assigned to'),
                 'warnings' => new external_warnings(),
             )
         );
@@ -170,18 +171,38 @@ class mod_icecreamgame_external extends external_api {
         
         $params = self::validate_parameters(self::assign_group_parameters(), array('icecreamgameid'=>$icecreamgameid, 'userid'=>$userid, 'group'=>$group));
         $warnings = array();
+        $group = $params['group'];
 
         try {
             // check if user is already assigned to a group
             $usergrade = $DB->get_record('icecreamgame_grades', array('userid'=>$params['userid'], 'icecreamgameid'=>$params['icecreamgameid']), $fields='*'); 
             if($usergrade->groupnum == 0) {
                 // user is not assigned to a group yet, update record
-                if(0 < $params['group'] && $params['group'] < 4) {
+                if(0 <= $group && $group < 4) {
                     // valid group index
-                    $usergrade->groupnum = $params['group'];
+                    if($group == 0) {
+                        // if user chose random assignment (group 0), choose group with fewest members
+                        $group = 1;
+                        $lowest_count = $DB->count_records("icecreamgame_grades", array(
+                            "icecreamgameid" => $icecreamgameid,
+                            "groupnum" => 1)
+                        );
+                        for($i = 2; $i < 4; $i++) {
+                            $group_count = $DB->count_records("icecreamgame_grades", array(
+                                "icecreamgameid" => $icecreamgameid,
+                                "groupnum" => $i)
+                            );
+                            if($group_count < $lowest_count) {
+                                $lowest_count = $group_count;
+                                $group = $i;
+                            }
+                        } 
+                    }
+
+                    $usergrade->groupnum = $group;
                     $DB->update_record('icecreamgame_grades', $usergrade);
                 } else {
-                    array_push($warnings, "Invalid group number: " . $params['group'] . '. Supported group numbers are 1, 2 or 3');
+                    array_push($warnings, "Invalid group number: " . $group . '. Supported group numbers are 1, 2 or 3');
                 }
             } else {
                 array_push($warnings, 'User is already assigned to a group');
@@ -191,6 +212,7 @@ class mod_icecreamgame_external extends external_api {
             array_push($warnings, $e->getMessage());
         }
         return array(
+            'group' => $group,
             'warnings' => $warnings
         );
     }

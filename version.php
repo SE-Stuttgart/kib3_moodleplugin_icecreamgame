@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_icecreamgame';
 $plugin->release = '0.1.0';
-$plugin->version = 20240529005;
+$plugin->version = 20240529006;
 $plugin->requires = 2020061514;
 $plugin->maturity = MATURITY_STABLE;
