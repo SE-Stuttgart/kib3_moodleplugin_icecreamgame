@@ -289,4 +289,147 @@ class mod_icecreamgame_external extends external_api {
             'warnings' => $warnings
         );
     }
+
+
+
+    public static function reset_group_parameters() {
+        return new external_function_parameters(
+            array(
+                'icecreamgameid' => new external_value(PARAM_INT, 'id of icecreamgame instance'),
+                'group' => new external_value(PARAM_INT, 'number of group'),
+            )
+        );
+    }
+    public static function reset_group_returns() {
+        return new external_single_structure(
+            array(
+                'warnings' => new external_warnings(),
+            )
+        );
+    }
+    public static function reset_group($icecreamgameid, $group) {
+        global $DB; 
+        
+        $params = self::validate_parameters(self::reset_group_parameters(), array('icecreamgameid'=>$icecreamgameid, 'group'=>$group));
+        $warnings = array();
+
+        // find all users from group, s.t. we can remove their guesses
+        $assigned_userids = $DB->get_fieldset_select("icecreamgame_grades", "userid", "icecreamgameid = ? AND groupnum = ?", array(
+            $icecreamgameid,
+            $group
+        ));
+        if(count($assigned_userids) > 0) {
+            // reset guesses
+            [$_insql_userids, $_insql_userids_params] = $DB->get_in_or_equal($assigned_userids, SQL_PARAMS_QM, 'userid');
+            $_insql_userids = 'userid '. $_insql_userids;
+            $DB->delete_records_select("icecreamgame_guesses", $_insql_userids, $_insql_userids_params);
+
+            // reset groups
+            $DB->delete_records("icecreamgame_grades", array(
+                'icecreamgameid' => $icecreamgameid,
+                'groupnum' => $group
+            ));
+        }
+      
+        return array(
+            'warnings' => $warnings
+        );
+    }
+
+
+    public static function reassign_member_parameters() {
+        return new external_function_parameters(
+            array(
+                'icecreamgameid' => new external_value(PARAM_INT, 'id of icecreamgame instance'),
+                'group' => new external_value(PARAM_INT, 'number of group to assign user to'),
+                'username' => new external_value(PARAM_TEXT, 'user name'),
+            )
+        );
+    }
+    public static function reassign_member_returns() {
+        return new external_single_structure(
+            array(
+                'warnings' => new external_warnings(),
+            )
+        );
+    }
+    public static function reassign_member($icecreamgameid, $group, $username) {
+        global $DB; 
+        
+        $params = self::validate_parameters(self::reassign_member_parameters(), array('icecreamgameid'=>$icecreamgameid, 'group'=>$group, 'username' => $username));
+        $warnings = array();
+
+        // find userid from username
+        $userid = $DB->get_field("user", "id", array(
+            "username" => $username
+        ));
+
+        // reset guesses
+        $DB->delete_records("icecreamgame_guesses", array(
+            'icecreamgameid' => $icecreamgameid,
+            'userid' => $userid
+        ));
+
+        // update group & reset grade 
+        $user_grade = $DB->get_record("icecreamgame_grades", array(
+            "icecreamgameid" => $icecreamgameid,
+            "userid" => $userid
+        ));
+        $user_grade->groupnum = $group;
+        $user_grade->finalgrade = 0;
+        $DB->update_record("icecreamgame_grades", $user_grade);
+
+      
+        return array(
+            'warnings' => $warnings
+        );
+    }
+
+
+    public static function get_instance_members_parameters() {
+        return new external_function_parameters(
+            array(
+                'icecreamgameid' => new external_value(PARAM_INT, 'id of icecreamgame instance'),
+            )
+        );
+    }
+    public static function get_instance_members_returns() {
+        return new external_single_structure(
+            array(
+                'usernames' => new external_multiple_structure(
+                    new external_value(PARAM_TEXT, "user names")
+                ),
+            )
+        );
+    }
+    public static function get_instance_members($icecreamgameid) {
+        global $DB; 
+        
+        $params = self::validate_parameters(self::get_instance_members_parameters(), array('icecreamgameid'=>$icecreamgameid));
+        $warnings = array();
+
+        // get course module id for icecreamgame instane
+        $module_type_id = $DB->get_field("modules", "id", array(
+            "name" => "icecreamgame"
+        ));
+        $cm_id = $DB->get_field("course_modules", "id", array(
+            "module" => $module_type_id,
+            "instance" => $icecreamgameid
+        ));
+        $modulecontext = context_module::instance($cm_id);
+        
+        // find all users enrolled in the course with this icecream game instance
+        $enrolled_users = get_enrolled_users($modulecontext);
+
+        $result = array();
+        foreach($enrolled_users as $user) {
+            if($user->username !== "kib3_webservice")
+                array_push($result, $user->username);
+        }
+
+        return array(
+            'usernames' => $result
+        );
+    }
+    
 }

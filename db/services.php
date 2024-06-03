@@ -66,4 +66,34 @@ $functions = array(
         'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
         'capabilities' => '', // comma separated list of capabilities used by the function.
     ), 
+
+    'mod_icecreamgame_reset_group' => array(         //web service function name
+        'classname'   => 'mod_icecreamgame_external',  //class containing the external function OR namespaced class in classes/external/XXXX.php
+        'methodname'  => 'reset_group',          //external function name
+        'description' => 'Reset all members of a group and their guesses for a given instance',    //human readable description of the web service function
+        'type'        => 'write',                  //database rights of the web service function (read, write)
+        'ajax' => true,        // is the service available to 'internal' ajax calls. 
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
+    ), 
+
+    'mod_icecreamgame_get_instance_members' => array(         //web service function name
+        'classname'   => 'mod_icecreamgame_external',  //class containing the external function OR namespaced class in classes/external/XXXX.php
+        'methodname'  => 'get_instance_members',          //external function name
+        'description' => 'Return all enrolled users who could take part in the given icecreamgame instance',    //human readable description of the web service function
+        'type'        => 'read',                  //database rights of the web service function (read, write)
+        'ajax' => true,        // is the service available to 'internal' ajax calls. 
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
+    ), 
+
+    'mod_icecreamgame_reassign_member' => array(         //web service function name
+        'classname'   => 'mod_icecreamgame_external',  //class containing the external function OR namespaced class in classes/external/XXXX.php
+        'methodname'  => 'reassign_member',          //external function name
+        'description' => 'Reassign member to specific group in the given icecreamgame instance',    //human readable description of the web service function
+        'type'        => 'read',                  //database rights of the web service function (read, write)
+        'ajax' => true,        // is the service available to 'internal' ajax calls. 
+        'services' => array(),    // Optional, only available for Moodle 3.1 onwards. List of built-in services (by shortname) where the function will be included.  Services created manually via the Moodle interface are not supported.
+        'capabilities' => '', // comma separated list of capabilities used by the function.
+    ), 
 );

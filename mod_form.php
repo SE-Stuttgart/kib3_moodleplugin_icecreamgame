@@ -66,16 +66,18 @@ class mod_icecreamgame_mod_form extends moodleform_mod {
 
         // Adding the rest of mod_icecreamgame settings, spreading all them into this fieldset
         // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'icecreamgamesettings', get_string('icecreamgamesettings', 'mod_icecreamgame'));
+        // $mform->addElement('static', 'label1', 'icecreamgamesettings', get_string('icecreamgamesettings', 'mod_icecreamgame'));
         $mform->addElement('header', 'icecreamgamefieldset', get_string('icecreamgamefieldset', 'mod_icecreamgame'));
         
-        // game settings
+        // game settings: trials
         $mform->addElement('text', 'trials', get_string('icecreamgame_trials', 'mod_icecreamgame'));
         $mform->setType('trials', PARAM_INT);
         $mform->addRule('trials', 'Nur Ganzzahlwerte erlaubt', 'numeric', null, 'client');
         $mform->addRule('trials', get_string('maximumchars', '', 10), 'maxlength', 10, 'client');
         $mform->addRule('trials', null, 'required', null, 'client');
         $mform->setDefault('trials', '1');
+
+        // 
 
         // Add standard elements.
         $this->standard_coursemodule_elements();
