@@ -40,22 +40,42 @@ to complete the installation from the command line.
 ### Configuring the web service
 
 1. Install the plugin 
-2. Site administration ->  scroll to section "Advanced features" -> Enable web services  `yes`
-3. Site administration -> Server -> scroll to section "Category: Web services" -> Overview
-	1. Enable web services -> `yes`
-	2. Enable protocols -> `rest`
-	5. Select a service -> Add
+2. `Site administration` ->  scroll to section "Advanced features" -> Enable web services  `yes`
+3. Create new user named 'kib3_webservice' and give user permission to create webservice tokens:
+	1. Go to `Site administration` -> `Users` -> `Add a new user`
+		* Name: `kib3_webservice`
+		* fill out the remaining required fields in any way you want
+	2. Go to `Site administration` -> `Users` -> `Define role`, then click `Add a new role`
+		* Use role or archetype: `manager`
+		* Click `Continue`
+		* Short Name: `kib3webservice`
+		* Scroll to the Capabilities section at the bottom. There, search for 
+			* `webservice/rest:use` and enable it
+			* `moodle/webservice:createtoken` and enable it
+		* Fill out the remaining required fields as you want, and click `Create Role`
+	3. Assign the new role to the user: Go to `Site administration` -> `Users` -> `Permissions` -> `Assign system roles`
+		* In the list of roles, click the newly created role
+		* On the next page, select the newly created user in the right hand column, and click `Add`
+4. `Site administration` -> `Server` -> scroll to section "Category: Web services" -> Overview
+	1. `Enable web services` -> `yes`
+	2. `Enable protocols` -> `rest`
+	5. `Select a service` -> `Add`
 		* Name: `kib3_webservices`
 		* Short name: `kib3_webservices`
-		* Enables : `yes`
-		* Authorised users only: `no`
+		* Enabled : `yes`
+		* Authorised users only: `yes`
 		* Required capability: `no required capability`
-		* Add service -> Automatic redirect to:
-	6. Add functions to the service 'kib3_webservices' (if no redirect: Site administration -> Server -> Category: Webservices -> Custom services (Moodle 3.x: External Services), then click `Functions` for kib3_webservices in section `Custom services` (Moodle 3.x: External Services))
-		* Add functions
-		* add all functions that start with `mod_icecreamgame` (4 functions)
-		* Add functions
-4. TODO: Create new user named 'kib3_webservice' and give user permission to create webservice tokens
+		* `Add service` -> Automatic redirect to:
+	6. Add functions to the service 'kib3_webservices' (if no redirect: `Site administration` -> `Server` -> `Category: Webservices` -> `Custom services` (Moodle 3.x: External Services), then click `Functions` for kib3_webservices in section `Custom services` (Moodle 3.x: External Services))
+		* Click `Add functions`
+		* add all functions that start with `mod_icecreamgame` (7 functions)
+	7. Navigate back (`Site administration` -> `Server` -> `Category: Webservices` -> `Custom services`). In row `kib3_webservices`, click on the link `Authorised users`.
+		* In the right hand column, select the webservice user that you created in step 3.1, then click `Add`
+	8. Enrol the webservice user that you created in step 3.1 into the course
+	9. Create a token for the webservice user: Go to `Site administration` -> `Server` -> `Category: Web Services` -> `Manage Tokens`. Click `Create Token`
+		* Select the webservice user that you created in step 3.1
+		* Select the service `kib3_webservices`
+		* Click `Save changes`
 5. Add an activity of type icecreamgame
 6. Log in as as student (not as a trainer / admin - you will get a token error!)
 7. Test the game
